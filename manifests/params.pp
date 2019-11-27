@@ -25,7 +25,7 @@ class nrpe::params {
       $nrpe_service     = 'nagios-nrpe-server'
       $nrpe_packages    = [
         'nagios-nrpe-server',
-        'nagios-plugins',
+        'monitoring-plugins',
       ]
     }
     'Archlinux':  {

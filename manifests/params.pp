@@ -1,19 +1,19 @@
 #
 class nrpe::params {
 
-  $nrpe_provider = $::osfamily ? {
+  $nrpe_provider = $facts['os']['family'] ? {
     'Solaris' => pkgutil,
     default   => undef,
   }
 
-  $nrpe_files_group = $::osfamily ? {
+  $nrpe_files_group = $facts['os']['family'] ? {
     /(Free|Open)BSD/ => 'wheel',
     default   => 'root',
   }
 
   $nrpe_plugin_file_mode = '0755'
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian':  {
       $libdir           = '/usr/lib/nagios/plugins'
       $nrpe_user        = 'nagios'
@@ -56,7 +56,7 @@ class nrpe::params {
       ]
     }
     'RedHat':  {
-      $libdir           = $::architecture ? {
+      $libdir           = $facts['os']['architecture'] ? {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }
@@ -106,7 +106,7 @@ class nrpe::params {
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
       $nrpe_service     = 'nrpe'
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         'SLES': {
           $nrpe_config      = '/etc/nagios/nrpe.cfg'
           $nrpe_ssl_dir     = '/etc/nagios/nrpe-ssl'
@@ -129,7 +129,7 @@ class nrpe::params {
       }
     }
     'Gentoo':  {
-      $libdir           = $::architecture ? {
+      $libdir           = $facts['os']['architecture'] ? {
         /x86_64/ => '/usr/lib64/nagios/plugins',
         default  => '/usr/lib/nagios/plugins',
       }

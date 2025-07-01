@@ -6,7 +6,7 @@ define nrpe::command (
   $package_name = $nrpe::package_name,
   $service_name = $nrpe::service_name,
   $libdir       = $nrpe::params::libdir,
-  $file_group   = $nrpe::params::nrpe_files_group,
+  $file_group   = $nrpe::params::nrpe_group,
   $sudo         = false,
   $sudo_user    = 'root',
 ) {

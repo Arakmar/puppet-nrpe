@@ -6,11 +6,6 @@ class nrpe::params {
     default   => undef,
   }
 
-  $nrpe_files_group = $facts['os']['family'] ? {
-    /(Free|Open)BSD/ => 'wheel',
-    default   => 'root',
-  }
-
   $nrpe_plugin_file_mode = '0755'
 
   case $facts['os']['family'] {

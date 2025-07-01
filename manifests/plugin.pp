@@ -6,7 +6,7 @@ define nrpe::plugin (
   $mode         = $nrpe::params::nrpe_plugin_file_mode,
   $libdir       = $nrpe::params::libdir,
   $package_name = $nrpe::params::nrpe_packages,
-  $file_group   = $nrpe::params::nrpe_files_group,
+  $file_group   = $nrpe::params::nrpe_group,
 ) {
   file { "${libdir}/${title}":
     ensure  => $ensure,

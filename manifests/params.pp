@@ -32,6 +32,23 @@ class nrpe::params {
       $user_home_dir    = '/var/lib/nagios'
       $user_shell       = '/bin/false'
     }
+    'Archlinux': {
+      $libdir           = '/usr/lib/monitoring-plugins'
+      $nrpe_user        = 'nrpe'
+      $nrpe_group       = 'nrpe'
+      $nrpe_pid_file    = '/run/nrpe/nrpe.pid'
+      $nrpe_config      = '/etc/nrpe/nrpe.cfg'
+      $nrpe_ssl_dir     = '/etc/nrpe/nrpe-ssl'
+      $nrpe_include_dir = '/etc/nrpe/nrpe.d'
+      $nrpe_service     = 'nrpe'
+      $nrpe_packages    = [
+        'nrpe',
+        'monitoring-plugins',
+      ]
+      $sudo_command     = '/usr/bin/sudo'
+      $user_home_dir    = '/'
+      $user_shell       = '/usr/bin/nologin'
+    }
     'Solaris': {
       $libdir           = '/opt/csw/libexec/nagios-plugins'
       $nrpe_user        = 'nagios'

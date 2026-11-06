@@ -38,6 +38,12 @@ describe 'nrpe::command' do
             'mode' => '0644',
           ).that_requires(['Package[nrpe]'])
         }
+      when 'Archlinux'
+        it {
+          is_expected.to contain_file('/etc/nrpe/nrpe.d/check_users.cfg').with(
+            'mode' => '0644',
+          ).that_requires(['Package[nrpe]'])
+        }
       else
         it {
           is_expected.to contain_file('/etc/nrpe.d/check_users.cfg').with(

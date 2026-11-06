@@ -26,6 +26,11 @@ describe 'nrpe::config::ssl' do
           it { is_expected.to contain_file('/usr/local/etc/nrpe-ssl/ca-cert.pem').with_ensure('file').with_content('ca cert file content') }
           it { is_expected.to contain_file('/usr/local/etc/nrpe-ssl/nrpe-cert.pem').with_ensure('file').with_content('cert file content') }
           it { is_expected.to contain_file('/usr/local/etc/nrpe-ssl/nrpe-key.pem').with_ensure('file').with_content('key file content') }
+        when 'Archlinux'
+          it { is_expected.to contain_file('/etc/nrpe/nrpe-ssl').with_ensure('directory') }
+          it { is_expected.to contain_file('/etc/nrpe/nrpe-ssl/ca-cert.pem').with_ensure('file').with_content('ca cert file content') }
+          it { is_expected.to contain_file('/etc/nrpe/nrpe-ssl/nrpe-cert.pem').with_ensure('file').with_content('cert file content') }
+          it { is_expected.to contain_file('/etc/nrpe/nrpe-ssl/nrpe-key.pem').with_ensure('file').with_content('key file content') }
         else
           it { is_expected.to contain_file('/etc/nagios/nrpe-ssl').with_ensure('directory') }
           it { is_expected.to contain_file('/etc/nagios/nrpe-ssl/ca-cert.pem').with_ensure('file').with_content('ca cert file content') }

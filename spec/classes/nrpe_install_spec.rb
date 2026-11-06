@@ -22,7 +22,11 @@ describe 'nrpe::install' do
         else
           it { is_expected.to contain_package('nrpe').with_ensure('installed') }
 
-          plugins_pkg = (facts[:os]['family'] == 'FreeBSD') ? 'nagios-plugins' : 'nagios-plugins-all'
+          plugins_pkg = case facts[:os]['family']
+                        when 'FreeBSD' then 'nagios-plugins'
+                        when 'Archlinux' then 'monitoring-plugins'
+                        else 'nagios-plugins-all'
+                        end
           it { is_expected.to contain_package(plugins_pkg).with_ensure('installed') }
         end
       end

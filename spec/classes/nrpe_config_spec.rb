@@ -15,6 +15,8 @@ describe 'nrpe::config' do
         case facts[:os]['family']
         when 'FreeBSD'
           it { is_expected.to contain_concat('/usr/local/etc/nrpe.cfg') }
+        when 'Archlinux'
+          it { is_expected.to contain_concat('/etc/nrpe/nrpe.cfg') }
         else
           it { is_expected.to contain_concat('/etc/nagios/nrpe.cfg') }
         end

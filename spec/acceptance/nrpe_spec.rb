@@ -3,6 +3,7 @@
 require 'spec_helper_acceptance'
 
 describe 'nrpe class' do
+  config_file = '/etc/nagios/nrpe.cfg'
   case fact('osfamily')
   when 'Debian'
     package_name = 'nagios-nrpe-server'
@@ -10,11 +11,14 @@ describe 'nrpe class' do
   when 'FreeBSD'
     package_name = 'nrpe'
     service_name = 'nrpe'
+  when 'Archlinux'
+    package_name = 'nrpe'
+    service_name = 'nrpe'
+    config_file  = '/etc/nrpe/nrpe.cfg'
   else
     service_name = 'nrpe'
     package_name = 'nrpe'
   end
-  config_file = '/etc/nagios/nrpe.cfg'
 
   describe 'default installation' do
     let(:pp) { 'include nrpe' }

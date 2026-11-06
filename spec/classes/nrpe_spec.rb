@@ -97,7 +97,7 @@ describe 'nrpe' do
         case facts[:os]['family']
         when 'OpenBSD'
           it { is_expected.to contain_group('_nrpe') }
-        when 'RedHat'
+        when 'Archlinux', 'RedHat'
           it { is_expected.to contain_group('nrpe') }
         else
           it { is_expected.to contain_group('nagios') }
@@ -129,6 +129,13 @@ describe 'nrpe' do
               .with_gid('_nrpe')
               .with_home('/var/lib/nagios')
               .with_shell('/bin/false')
+          }
+        when 'Archlinux'
+          it {
+            is_expected.to contain_user('nrpe')
+              .with_gid('nrpe')
+              .with_home('/')
+              .with_shell('/usr/bin/nologin')
           }
         when 'RedHat'
           it {
@@ -164,7 +171,7 @@ describe 'nrpe' do
           it {
             is_expected.to contain_user('_nrpe').with_require('Group[_nrpe]')
           }
-        when 'RedHat'
+        when 'Archlinux', 'RedHat'
           it {
             is_expected.to contain_group('nrpe')
           }

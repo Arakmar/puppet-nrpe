@@ -112,6 +112,10 @@ This module has been documented with [puppet-strings](https://github.com/puppetl
 
  * This module depends on OpenCSW packages
 
+### Arch Linux
+
+ * nrpe is only available in the [AUR](https://aur.archlinux.org/packages/nrpe): build it or serve it from your own repository before applying this module
+
 ## Development
 
 Improvements and bug fixes are greatly appreciated.

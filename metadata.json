@@ -80,6 +80,9 @@
     },
     {
       "operatingsystem": "Solaris"
+    },
+    {
+      "operatingsystem": "Archlinux"
     }
   ]
 }

@@ -45,6 +45,38 @@ describe 'nrpe::command' do
           ).that_requires(['Package[nrpe]'])
         }
       end
+
+      context 'with a custom include_dir' do
+        let(:pre_condition) { "class { 'nrpe': include_dir => '/etc/nrpe.d' }" }
+
+        it {
+          is_expected.to contain_file('/etc/nrpe.d/check_users.cfg').with(
+            'owner' => 'root',
+            'group' => %w[FreeBSD OpenBSD].include?(facts[:os]['family']) ? 'wheel' : 'root',
+            'mode'  => '0644',
+          )
+        }
+
+        context 'when the command files are restricted to the nrpe group' do
+          let(:pre_condition) do
+            <<~PUPPET
+              class { 'nrpe':
+                include_dir               => '/etc/nrpe.d',
+                command_file_group        => 'nrpe-group',
+                command_file_default_mode => '0640',
+              }
+            PUPPET
+          end
+
+          it {
+            is_expected.to contain_file('/etc/nrpe.d/check_users.cfg').with(
+              'owner' => 'root',
+              'group' => 'nrpe-group',
+              'mode'  => '0640',
+            )
+          }
+        end
+      end
     end
   end
 end

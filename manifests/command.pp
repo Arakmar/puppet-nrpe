@@ -43,7 +43,7 @@ define nrpe::command (
       },
     ),
     owner   => 'root',
-    group   => $nrpe::params::nrpe_files_group,
+    group   => $nrpe::command_file_group,
     mode    => pick($file_mode, $nrpe::command_file_default_mode),
   }
 }

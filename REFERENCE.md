@@ -93,6 +93,7 @@ The following parameters are available in the `nrpe` class:
 * [`nrpe_group`](#-nrpe--nrpe_group)
 * [`nrpe_pid_file`](#-nrpe--nrpe_pid_file)
 * [`command_file_default_mode`](#-nrpe--command_file_default_mode)
+* [`command_file_group`](#-nrpe--command_file_group)
 * [`supplementary_groups`](#-nrpe--supplementary_groups)
 * [`nrpe_ssl_dir`](#-nrpe--nrpe_ssl_dir)
 * [`ssl_cert_file_content`](#-nrpe--ssl_cert_file_content)
@@ -278,6 +279,16 @@ Data type: `Stdlib::Filemode`
 The default file mode to use when creating NRPE command files in the includedir.
 
 Default value: `'0644'`
+
+##### <a name="-nrpe--command_file_group"></a>`command_file_group`
+
+Data type: `String[1]`
+
+The group owning the NRPE command files in the includedir. When NRPE runs unprivileged (systemd units with `User=`,
+or a reload after it dropped its privileges), it reads them as `nrpe_user`: set this to `nrpe_group` with a
+`command_file_default_mode` of `0640` to hide them (and any credential in a command line) from other local users.
+
+Default value: `$nrpe::params::nrpe_files_group`
 
 ##### <a name="-nrpe--supplementary_groups"></a>`supplementary_groups`
 

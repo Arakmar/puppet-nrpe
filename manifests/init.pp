@@ -61,6 +61,10 @@
 #   The name of the file in which the NRPE daemon should write it's process ID number.
 # @param command_file_default_mode
 #   The default file mode to use when creating NRPE command files in the includedir.
+# @param command_file_group
+#   The group owning the NRPE command files in the includedir. When NRPE runs unprivileged (systemd units with `User=`,
+#   or a reload after it dropped its privileges), it reads them as `nrpe_user`: set this to `nrpe_group` with a
+#   `command_file_default_mode` of `0640` to hide them (and any credential in a command line) from other local users.
 # @param supplementary_groups
 #   If set, the `nrpe_user` will be added to these supplementary groups.
 # @param nrpe_ssl_dir
@@ -146,6 +150,7 @@ class nrpe (
   Boolean                              $ssl_log_client_cert             = false,
   Boolean                              $ssl_log_client_cert_details     = false,
   Stdlib::Filemode                     $command_file_default_mode       = '0644',
+  String[1]                            $command_file_group              = $nrpe::params::nrpe_files_group,
   Array[String[1]]                     $supplementary_groups            = [],
   Boolean                              $manage_pid_dir                  = false,
   Integer[0]                           $listen_queue_size               = $nrpe::params::listen_queue_size,

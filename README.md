@@ -68,6 +68,16 @@ nrpe::commands:
     command: 'check_users -w 5 -c 10'
 ```
 
+The command files are world-readable by default. To keep them (and any credential in a command line) away from other
+local users, make them readable by the NRPE group only:
+
+```puppet
+class { 'nrpe':
+  command_file_group        => 'nagios', # nrpe on RedHat
+  command_file_default_mode => '0640',
+}
+```
+
 Full documentation for the `nrpe::command` type is available in the [reference](REFERENCE.md#nrpecommand) documentation.
 
 ### nrpe::plugin
